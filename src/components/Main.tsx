@@ -1,31 +1,86 @@
 import React from "react";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import '../assets/styles/Main.scss';
+import EmailIcon from "@mui/icons-material/Email";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import PlaceIcon from "@mui/icons-material/Place";
+import Expertise from "./Expertise"; // we’ll render it embedded
+import "../assets/styles/Main.scss";
 
 function Main() {
-
   return (
-    <div className="container">
-      <div className="about-section">
-        <div className="image-wrapper">
-          <img src="https://my-aws-assets.s3.us-west-2.amazonaws.com/portfolio-img/avatar_circle.jpeg" alt="Avatar" />
-        </div>
-        <div className="content">
-          <div className="social_icons">
-            <a href="https://github.com/yujisatojr" target="_blank" rel="noreferrer"><GitHubIcon/></a>
-            <a href="https://www.linkedin.com/in/yujisato/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
-          </div>
-          <h1>Yuji Sato</h1>
-          <p>Full Stack Engineer</p>
+    <section className="hero container-full" id="about">
+      <div className="hero-grid">
+        {/* LEFT: About Me */}
+        <article className="card glass about-card">
+          <h1 className="about-title">Aashya M</h1>
+          <p className="tagline">Power BI & Data Engineering</p>
 
-          <div className="mobile_social_icons">
-            <a href="https://github.com/yujisatojr" target="_blank" rel="noreferrer"><GitHubIcon/></a>
-            <a href="https://www.linkedin.com/in/yujisato/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
+          {/* Social / contact row */}
+          <div className="about-links">
+            <a
+              href="https://github.com/aashya0409-git"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="icon-link"
+            >
+              <GitHubIcon />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/aashyam/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="icon-link"
+            >
+              <LinkedInIcon />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="mailto:aashya0409@gmail.com"
+              className="icon-link"
+              aria-label="Email"
+            >
+              <EmailIcon />
+              <span>Email</span>
+            </a>
+            <span className="icon-link muted">
+              <PlaceIcon />
+              <span>Toronto, ON</span>
+            </span>
           </div>
-        </div>
+
+          <div className="about-body">
+            <p>
+              Business Intelligence & Data Engineering professional with 7+ years
+              delivering end-to-end analytics solutions across banking and enterprise
+              domains. I design reliable BI systems and data models, building{" "}
+              <strong>Power BI</strong> dashboards and <strong>ETL pipelines</strong>{" "}
+              with <strong>SQL Server, SSIS/ADF</strong>, and <strong>Microsoft Fabric</strong>—focused on performance, governance, and clear data
+              storytelling.
+            </p>
+            <p>
+              Work spans financial risk analytics, regulatory reporting, and KPI
+              modeling. I enjoy integrating proven MSBI fundamentals with modern cloud
+              platforms like Synapse, Databricks (PySpark), and Fabric to create
+              scalable, auditable analytics.
+            </p>
+            <ul className="bullets">
+              <li>7+ years in BI, data modeling, and reporting automation</li>
+              <li>Power BI, DAX, SQL, SSIS/ADF, Fabric; CI/CD with Azure DevOps</li>
+              <li>Banking & financial services, risk & regulatory reporting</li>
+              <li>Data quality, performance tuning, RLS/OLS governance</li>
+            </ul>
+          </div>
+        </article>
+
+        {/* RIGHT: Expertise (embedded so it doesn’t render as a separate page section) */}
+        <aside className="expertise-aside" id="expertise">
+          <Expertise embedded />
+        </aside>
       </div>
-    </div>
+    </section>
   );
 }
 

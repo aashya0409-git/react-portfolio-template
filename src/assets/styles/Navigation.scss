@@ -1,0 +1,24 @@
+.navbar-fixed-top {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--nav-bd);
+  backdrop-filter: blur(10px);
+}
+
+.navigation-bar {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.navigation-bar button {
+  text-transform: none;
+  letter-spacing: .2px;
+  font-weight: 600;
+}
+
+.navbar-fixed-top.scrolled {
+  background: rgba(10,14,24,0.96) !important;
+}

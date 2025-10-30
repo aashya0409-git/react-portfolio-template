@@ -1,38 +1,16 @@
-.vertical-timeline span {
-    color: white;
-    font-family: 'Courier Prime', monospace;
+/* Timeline – no @extend usage */
+
+:root { --text: #e8ebf5; }
+
+.items-container.timeline-wrap {
+  padding-top: clamp(28px, 3.5vw, 40px);
 }
 
-.vertical-timeline p {
-    color: rgb(39, 40, 34);
+.timeline-title {
+  font-size: clamp(1.6rem, 2.6vw, 2rem);
+  font-weight: 800;
+  margin: 0 0 1.25rem;
+  color: var(--text);
 }
 
-.vertical-timeline-element p {
-    color: rgb(39, 40, 34);
-}
-
-.vertical-timeline-element h3 {
-    color: rgb(39, 40, 34);
-}
-
-.vertical-timeline-element h4 {
-    color: rgb(39, 40, 34);
-}
-
-.vertical-timeline-element span {
-    color: rgb(39, 40, 34);
-}
-
-.vertical-timeline-element .vertical-timeline-element-date {
-    color: white;
-}
-
-.svg-inline--fa {
-    color: white;
-}
-
-@media screen and (max-width: 1170px) {
-    .vertical-timeline-element .vertical-timeline-element-date {
-        color: rgb(39, 40, 34);
-    }
-}
+/* You’re using react-vertical-timeline styles; we only tweak spacing via props in TSX */

@@ -1,44 +1,32 @@
-import React, {useState, useEffect} from "react";
-import {
-  Main,
-  Timeline,
-  Expertise,
-  Project,
-  Contact,
-  Navigation,
-  Footer,
-} from "./components";
-import FadeIn from './components/FadeIn';
-import './index.scss';
+import React, { useEffect, useState } from "react";
+import Navigation from "./components/Navigation";
+import Main from "./components/Main";
+import Timeline from "./components/Timeline";
+import Project from "./components/Project";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import "./index.scss";
 
 function App() {
-    const [mode, setMode] = useState<string>('dark');
+  const [mode, setMode] = useState<"dark" | "light">("dark");
+  const modeChange = () => setMode((m) => (m === "dark" ? "light" : "dark"));
 
-    const handleModeChange = () => {
-        if (mode === 'dark') {
-            setMode('light');
-        } else {
-            setMode('dark');
-        }
-    }
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", mode === "dark");
+  }, [mode]);
 
-    useEffect(() => {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
-
-    return (
-    <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
-        <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
-        <FadeIn transitionDuration={700}>
-            <Main/>
-            <Expertise/>
-            <Timeline/>
-            <Project/>
-            <Contact/>
-        </FadeIn>
-        <Footer />
+  return (
+    <div className={`app-root ${mode === "dark" ? "dark-mode" : ""}`}>
+      <Navigation parentToChild={{ mode }} modeChange={modeChange} />
+      {/* HERO: About (left) + Expertise (right) */}
+      <Main />
+      {/* Below sections */}
+      <Timeline />
+      <Project />
+      <Contact />
+      <Footer />
     </div>
-    );
+  );
 }
 
 export default App;

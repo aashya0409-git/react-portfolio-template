@@ -1,15 +1,7 @@
-footer {
-    text-align: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
-
-    svg {
-        width: 1.1em !important;
-        height: 1.1em !important;
-        margin-right: 10px;
-    }
-
-    p {
-        font-size: 0.8em;
-    }
+.footer {
+  padding: 36px 0 70px; text-align: center;
+  border-top: 1px solid var(--border); margin-top: 24px;
 }
+.footer__links { display: flex; gap: 10px; justify-content: center; margin-bottom: 8px; }
+.footer__links a { padding: 8px; border: 1px solid var(--border); border-radius: 10px; }
+.footer__links a:hover { color: var(--accent); border-color: rgba(91,124,255,.45); }
