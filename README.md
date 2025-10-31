@@ -2,9 +2,7 @@
 
 A modern, responsive developer portfolio built with React, TypeScript, and SCSS, showcasing my professional experience in Power BI, Data Engineering, and Business Intelligence development.
 
-🚀 Live Demo
-
-🔗 View Portfolio on GitHub Pages
+🔗 View Portfolio on GitHub Pages : https://aashya0409-git.github.io/react-portfolio-template/
 
 🧩 Tech Stack
 Category	    | Tools & Frameworks
