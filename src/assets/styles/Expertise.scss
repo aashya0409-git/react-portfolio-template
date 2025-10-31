@@ -1,73 +1,15 @@
-/* Title (only shown when NOT embedded) */
-.skills-container:not(.embedded) > h1 {
-  margin: 0 0 12px;
-  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-  font-weight: 800;
+.skills-container.embedded{padding:10px}
+.exp-grid{
+  display:grid; gap:28px;
+  grid-template-columns: repeat(3, minmax(0,1fr));
 }
-
-/* Grid of 3 cards */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+.exp-card{
+  .exp-card__icon{font-size:29px; opacity:.9; margin-bottom:.25rem}
+  h3{font-size:1.35rem; margin-bottom:.75rem}
+  p{font-size:1.25rem; margin:.65rem 0 .8rem}
+  .exp-card__chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{font-size:0.25rem}
 }
-
-@media (max-width: 1100px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.skill.card {
-  padding: 18px;
-}
-
-.skill__icon {
-  display: inline-grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  background: rgba(138, 180, 255, 0.12);
-  border: 1px solid rgba(138, 180, 255, 0.25);
-
-  svg { font-size: 18px; }
-}
-
-.skill h3 {
-  margin: 0 0 6px;
-  font-size: 1.05rem;
-  font-weight: 800;
-}
-
-.skill p {
-  margin: 0 0 10px;
-  color: var(--text);
-  line-height: 1.5;
-}
-
-/* Chips row */
-.flex-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-
-  .chip-title {
-    font-weight: 700;
-    opacity: 0.85;
-    margin-right: 6px;
-  }
-
-  .chip {
-    --chip-bg: rgba(255, 255, 255, 0.06);
-    --chip-br: rgba(180, 200, 255, 0.14);
-    background: var(--chip-bg);
-    border: 1px solid var(--chip-br);
-    color: var(--text);
-    border-radius: 999px;
-    height: 26px;
-    .MuiChip-label { padding: 0 10px; }
-  }
+@media(max-width:1300px){
+  .exp-grid{grid-template-columns:1fr}
 }

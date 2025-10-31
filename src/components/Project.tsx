@@ -1,32 +1,25 @@
 import React from "react";
-import retailMock from '../assets/images/retail-analytics.png';
-import '../assets/styles/Project.scss';
+import Chip from "@mui/material/Chip";
+import retailAnalysis from "../assets/images/retail-analytics.png";
 
-function Project() {
-  return(
-    <div className="container" id="projects">
-      <div className="items-container projects-container">
-        <h1>Personal Projects</h1>
-        <div className="projects-grid">
-          <div className="project">
-            <a href="https://github.com/" target="_blank" rel="noreferrer">
-              <img src={retailMock} className="zoom" alt="Retail Analytics" width="100%"/>
-            </a>
-            <a href="https://github.com/" target="_blank" rel="noreferrer"><h2>Retail Sales Analytics — End-to-End Microsoft BI</h2></a>
-            <p className="muted">
-              Complete BI solution across <strong>SQL Server</strong>, <strong>SSIS</strong>, <strong>SSAS</strong> and <strong>Power BI</strong>.
-              ETL cleansing/error handling, SSAS cube with KPIs, and executive dashboards (KPIs, product, customer).
-              Versioned with Git LFS and Markdown; bridges MSBI fundamentals to <strong>ADF / Synapse / Fabric</strong>.
-            </p>
+export default function Project() {
+  const tags = ["SQL Server","SSIS","SSAS (Tabular/Multi)","Power BI","DAX","Data Modeling"];
 
-            <div className="tech-tags">
-              {["SQL Server","SSIS","SSAS (Tabular/Multi)","Power BI","DAX","Data Modeling","ADF","Synapse","Fabric"]
-                .map((t, i) => <span key={i} className="chip">{t}</span>)}
-            </div>
+  return (
+    <div className="projects-container">
+      <div className="project-card card glass">
+        <img src={retailAnalysis} alt="Retail Sales Analytics dashboard mock" />
+        <div className="project-body">
+          <h3>Retail Sales Analytics — End-to-End Microsoft BI</h3>
+          <p>
+            Complete BI solution across SQL Server, SSIS, SSAS and Power BI. ETL cleansing/error handling,
+            SSAS cube with KPIs, and executive dashboards. Versioned with Git LFS & Markdown; bridges MSBI fundamentals to ADF / Synapse / Fabric.This project demonstrates the design of a full Microsoft BI pipeline — from raw CSVs to Power BI dashboards — showcasing ETL, data modeling, analytics, and reporting skills. I built it to simulate a real-world retail sales analytics environment, integrating data from multiple sources into a clean, analytical model.
+          </p>
+          <div className="chips">
+            {tags.map((t) => <Chip key={t} label={t} className="chip" />)}
           </div>
         </div>
       </div>
     </div>
   );
 }
-export default Project;

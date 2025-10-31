@@ -1,166 +1,43 @@
-/* ================================
-   Global base + theme variables
-   ================================ */
-
-:root {
-  /* Dark theme (default) */
-  --text: #e9eefc;
-  --text-muted: #c9d4f0;
-  --text-dark: #0b1220;
-  --accent: #8ab4ff;
-
-  --card-bg: rgba(5, 10, 20, 0.55);
-  --card-br: rgba(180, 200, 255, 0.14);
-  --chip-bg: rgba(255, 255, 255, 0.06);
-  --chip-br: rgba(180, 200, 255, 0.14);
-
-  --gutter: 16px;        /* small safe side padding */
-  --section-pad: 32px;   /* vertical section rhythm */
+:root{
+  --bg:#0b1222;
+  --bg-soft:#0e162a;
+  --card:rgba(16,24,44,0.65);
+  --card-border:rgba(255,255,255,0.12);
+  --text:#eef2ff;
+  --text-muted:#b8c2d9;
+  --brand:#d2ddec;
+  --chip:#4d5c5d;
 }
 
-/* Optional light mode support */
-.light-mode {
-  --text: #0b1220;
-  --text-muted: #344159;
-  --accent: #255df5;
-
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --card-br: rgba(10, 20, 40, 0.15);
-  --chip-bg: rgba(0, 0, 0, 0.06);
-  --chip-br: rgba(0, 0, 0, 0.12);
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Segoe UI Emoji";
+  color:var(--text); background: var(--bg) no-repeat center/cover fixed;
+  background-image: url("./background-img.jpg");
 }
 
-/* ================================
-   Reset-ish + base
-   ================================ */
+h1,h2,h3,h4,h5,h6{color:rgb(244, 246, 248); margin:0 0 .5rem;}
+p,span,li,small{color:var(--text); opacity:.95}
+.muted{color:var(--text-muted)}
+.section-title{font-size:2.4rem; letter-spacing:.2px; margin:0 0 .75rem}
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+.container-full{width:min(2400px,120vw); margin:0 auto; padding:0 12px;}
+.row-2{padding:40px 0 6px;}
+
+.card{
+  border-radius:14px; border:1px solid var(--card-border); padding:18px;
 }
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  color: var(--text);
-
-  /* Full-page background */
-  background-image: url('./background-img.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  min-height: 100vh;
-}
-
-/* In case you toggle a .dark-mode class on <body> from JS */
-.dark-mode body {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Code font utility */
-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New",
-    monospace !important;
-  font-size: 0.95rem !important;
-}
-
-/* ================================
-   Typography & links
-   ================================ */
-
-h1, h2, h3, h4, h5, h6 { color: var(--text); margin: 0 0 0.5rem; }
-p, span, li, small     { color: var(--text); }
-.muted                 { color: var(--text-muted); }
-
-a {
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s ease, opacity 0.2s ease;
-}
-a:hover { color: var(--accent); }
-
-/* ================================
-   Layout utilities
-   ================================ */
-
-/* Generic full-width section container with small side gutters */
-.container {
-  width: 100%;
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-}
-
-/* Full-bleed variant used by the hero */
-.container-full {
-  width: 100%;
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-}
-
-/* Common vertical rhythm for sections that still want spacing */
-.items-container {
-  padding-top: var(--section-pad);
-  padding-bottom: var(--section-pad);
-}
-
-/* ================================
-   Reusable visual utilities
-   ================================ */
-
-/* Glass card surface (also used by components) */
 .glass {
-  background: var(--card-bg);
-  border: 1px solid var(--card-br);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 251, 251, 0.05);
+  backdrop-filter: blur(26px);
+  border: 1px solid rgba(246, 243, 243, 0.08);
 }
 
-/* Section title helper (kept so @extend targets never error) */
-.section-title {
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  margin: 0 0 0.75rem;
+
+.chip .MuiChip-root, .chip{
+  background:var(--chip)!important; color:var(--text)!important; border:2px solid rgba(86, 80, 80, 0.12)!important; font-size:1.1rem!important;
 }
 
-/* Chip look used in Expertise */
-.chip-surface {
-  background: var(--chip-bg);
-  border: 1px solid var(--chip-br);
-  color: var(--text);
-  border-radius: 999px;
-}
-
-/* ================================
-   Page-level tweaks
-   ================================ */
-
-/* Keep nav off the content a bit (used by Main/Hero) */
-.nav-offset {
-  padding-top: 96px;
-}
-
-/* Prevent images from overflowing cards */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+a{color:var(--text); text-decoration:none}
+a:hover{opacity:.9}

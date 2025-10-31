@@ -1,24 +1,36 @@
-.navbar-fixed-top {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: var(--nav-bg) !important;
-  border-bottom: 1px solid var(--nav-bd);
-  backdrop-filter: blur(10px);
+.topbar {
+  background: rgba(20, 24, 32, 0.6);
+  backdrop-filter: blur(8px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.navigation-bar {
-  max-width: var(--page-max);
-  margin: 0 auto;
-  width: 100%;
+.topbar.scrolled{background:rgba(62, 84, 94, 0.92)}
+.topbar__inner{
+  width:min(1400px,96vw); margin:0 auto; display:flex; gap:12px; justify-content:flex-end;
+}
+.topbar__menu{display:none}
+.topbar__links > button{
+  color:#d7dae1; text-transform:none; font-weight:600; letter-spacing:.25px; font-size: clamp(1.3rem, 1.5vw, 1rem);
+}
+@media (max-width:800px){
+  .topbar__menu{display:inline-flex}
+  .topbar__links{display:none}
+}
+/* src/assets/styles/Navigation.scss */
+
+.MuiDrawer-paper {
+  background-color: #000 !important; /* or any dark shade you prefer */
+  color: #fff !important;            /* make all text white */
 }
 
-.navigation-bar button {
-  text-transform: none;
-  letter-spacing: .2px;
-  font-weight: 600;
+.MuiListItemText-primary {
+  color: #fff !important;            /* explicitly set the nav item color */
+  opacity: 1 !important;
+  font-weight: 500;
+  font-size: 2rem;
 }
 
-.navbar-fixed-top.scrolled {
-  background: rgba(10,14,24,0.96) !important;
+.MuiListItemButton-root:hover .MuiListItemText-primary {
+  color: #6ea4ff !important;         /* highlight color on hover */
 }

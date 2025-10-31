@@ -1,16 +1,5 @@
-/* Timeline – no @extend usage */
-
-:root { --text: #e8ebf5; }
-
-.items-container.timeline-wrap {
-  padding-top: clamp(28px, 3.5vw, 40px);
-}
-
-.timeline-title {
-  font-size: clamp(1.6rem, 2.6vw, 2rem);
-  font-weight: 800;
-  margin: 0 0 1.25rem;
-  color: var(--text);
-}
-
-/* You’re using react-vertical-timeline styles; we only tweak spacing via props in TSX */
+.timeline-wrap{padding-top:.25rem}
+.vt-card .card{margin:0}
+.vertical-timeline-element-content{padding:0!important; background:transparent!important; box-shadow:none!important}
+.vertical-timeline-element-content .card{padding:26px;font-size:2rem; background:var(--card-bg); border:2px solid rgba(255,255,255,0.15); box-shadow:0 6px 26px rgba(0,0,0,0.35)}
+.vertical-timeline-element-date{color:rgb(252, 255, 255)!important;font-size:1.2rem!important; font-weight:600!important; margin-bottom:8px!important}

@@ -1,97 +1,107 @@
-import React, { useRef, useState } from 'react';
-import '../assets/styles/Contact.scss';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import TextField from '@mui/material/TextField';
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import EmailIcon from "@mui/icons-material/Email";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PlaceIcon from "@mui/icons-material/Place";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
-function Contact() {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [nameError, setNameError] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [messageError, setMessageError] = useState<boolean>(false);
-  const form = useRef();
+export default function Contact() {
+  const [name, setName] = useState("");
+  const [reach, setReach] = useState("");
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const sendEmail = (e: any) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    setNameError(name === '');
-    setEmailError(email === '');
-    setMessageError(message === '');
+    if (!name || !reach || !msg) {
+      alert("Please fill in all required fields.");
+      return;
+    }
 
-    // Plug EmailJS here if desired
-    // if (name && email && message) { ... }
+    setLoading(true);
+
+    const serviceID = "service_qgt5ovr";   // 🔹 Replace with your EmailJS service ID
+    const templateID = "template_3u60v8t"; // 🔹 Replace with your EmailJS template ID
+    const publicKey = "W5efJiRG1yZQ9eKbu";   // 🔹 Replace with your EmailJS public key
+
+    const templateParams = {
+      from_name: name,
+      contact_info: reach,
+      message: msg,
+    };
+
+    emailjs.send(serviceID, templateID, templateParams, publicKey)
+      .then(() => {
+        alert("Thanks for reaching out! I’ll get back to you soon.");
+        setName("");
+        setReach("");
+        setMsg("");
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        alert("Oops! Something went wrong. Please try again later.");
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div id="contact" className="container">
-      <div className="items-container contact_wrapper">
-        <h1>Contact</h1>
-        <div className="contact-grid">
-          {/* Left info */}
-          <div className="contact-info card">
-            <p className="muted">Got a project or an analytics challenge? Let’s connect.</p>
-            <div className="contact-list">
-              <div className="contact-row"><EmailIcon/><a href="mailto:aashya0409@gmail.com">aashya0409@gmail.com</a></div>
-              <div className="contact-row"><LinkedInIcon/><a href="https://www.linkedin.com/in/aashyam/" target="_blank" rel="noreferrer">linkedin.com/in/aashyam</a></div>
-              <div className="contact-row"><LocationOnIcon/><span>Toronto, Ontario, Canada</span></div>
-            </div>
-          </div>
+    <section id="contact" className="container-full contact-wrap">
+      <h2 className="section-title">Contact</h2>
 
-          {/* Right form */}
-          <Box
-            ref={form}
-            component="form"
-            noValidate
-            autoComplete="off"
-            className='contact-form'
-          >
-            <div className='form-flex'>
-              <TextField
-                required
-                label="Your Name"
-                placeholder="What's your name?"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                error={nameError}
-                helperText={nameError ? "Please enter your name" : ""}
-                InputLabelProps={{ sx: { color: 'var(--text)' } }}
-              />
-              <TextField
-                required
-                label="Email / Phone"
-                placeholder="How can I reach you?"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                error={emailError}
-                helperText={emailError ? "Please enter your email or phone number" : ""}
-                InputLabelProps={{ sx: { color: 'var(--text)' } }}
-              />
-            </div>
+      <div className="contact-grid">
+        <aside className="card glass contact-card">
+          <p>
+            I’m currently open to opportunities in <strong>Data Analysis, BI, and Reporting</strong>.
+            Feel free to reach out if you’re hiring, have a project idea, or simply want to connect
+            about analytics and Power BI solutions.
+          </p>
+          <p className="rowline">
+            <PlaceIcon />
+            <span>Toronto, Ontario, Canada</span>
+          </p>
+        </aside>
+
+        <form className="card glass contact-form" onSubmit={submit} noValidate>
+          <div className="form-row">
             <TextField
-              required
-              label="Message"
-              placeholder="Send me any inquiries or questions"
-              multiline
-              rows={8}
-              className="body-form"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              error={messageError}
-              helperText={messageError ? "Please enter the message" : ""}
-              InputLabelProps={{ sx: { color: 'var(--text)' } }}
+              label="Your Name *"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              fullWidth
             />
-            <Button variant="contained" endIcon={<SendIcon />} onClick={sendEmail}>
-              Send
+            <TextField
+              label="Email / Phone *"
+              value={reach}
+              onChange={(e) => setReach(e.target.value)}
+              fullWidth
+            />
+          </div>
+        <div className="form-column">
+          <TextField
+            label="Message *"
+            value={msg}
+            onChange={(e) => setMsg(e.target.value)}
+            multiline
+            rows={6}
+            fullWidth
+          />
+ </div>
+          <div className="actions">
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={loading}
+              sx={{
+    background: "#2e5652ff"   ,      // your new color
+    "&:hover": { backgroundColor: "#568385ff" } // hover shade
+  }}
+            >
+              {loading ? "Sending..." : "Send"}
             </Button>
-          </Box>
-        </div>
+          </div>
+        </form>
       </div>
-    </div>
+    </section>
   );
 }
-export default Contact;
