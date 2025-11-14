@@ -1,6 +1,6 @@
 /* Container & grid */
 .hero.container-full {
-  max-width: 2400px;
+  max-width: 2000px;
   margin: 0 auto;
   padding: 120px;
 }
@@ -195,14 +195,14 @@ img, video, canvas, svg {
   .expertise-aside {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
-    gap: 18px !important;
+    gap: 16px !important;
   }
 
   /* Guard against wide paddings causing squeeze */
   .container-full,
   .hero.container-full {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
   /* --- MOBILE AVATAR FIX --- */
 @media (max-width: 768px) {
