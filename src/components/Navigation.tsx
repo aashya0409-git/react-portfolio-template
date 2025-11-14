@@ -36,7 +36,7 @@ export default function Navigation() {
 
   return (
     <AppBar position="fixed"  sx={{
-    backgroundColor: "#304345ff", // dark header
+    backgroundColor: "transparent", // dark header
     color: "#ffffff",
     boxShadow: "none",
     borderBottom: "1px solid rgba(255,255,255,0.1)"

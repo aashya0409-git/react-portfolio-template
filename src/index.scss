@@ -6,7 +6,7 @@
   --text:#eef2ff;
   --text-muted:#b8c2d9;
   --brand:#d2ddec;
-  --chip:#4d5c5d;
+  --chip:#829293;
 }
 
 *{box-sizing:border-box}
@@ -27,7 +27,7 @@ p,span,li,small{color:var(--text); opacity:.95}
 
 /* FIX: use 100vw, not 120vw, to prevent overflow */
 .container-full{width:min(2100px,90vw); margin:0 auto; padding:0 12px;}
-.row-2{padding:40px 0 6px;}
+.row-2{padding:60px 0 8px;}
 
 .card{
   border-radius: 16px;
