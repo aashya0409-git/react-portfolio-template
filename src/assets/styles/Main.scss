@@ -209,7 +209,7 @@ img, video, canvas, svg {
   /* 1) Nudge the image down so the top isn't cut */
   .avatar {
     object-fit: cover;           /* keep the nice fill */
-    object-position: 50% 25%;    /* was center; show a bit more forehead */
+    object-position: 50% 20%;    /* was center; show a bit more forehead */
     margin-top: 6px;             /* tiny breathing room inside the card */
   }
 
