@@ -7,7 +7,7 @@
   a{color:var(--text)}
 }
 .contact-grid .contact-card{
-  font-size: clamp(1.4rem, 1.2vw, 1.3rem);}
+  font-size: clamp(1.3rem, 1.2vw, 1.1rem);}
 .contact-form .form-row{
   display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:14px;  background-color: rgb(113, 123, 124);
   label{font-size: 3.95 rem; color: antiquewhite;margin-bottom:4px; display:block}
