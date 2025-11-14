@@ -2,7 +2,7 @@
 .hero.container-full {
   max-width: 2400px;
   margin: 0 auto;
-  padding: 100px;
+  padding: 120px;
 }
 
 .hero-grid {
@@ -204,6 +204,21 @@ img, video, canvas, svg {
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
+  /* --- MOBILE AVATAR FIX --- */
+@media (max-width: 768px) {
+  /* 1) Nudge the image down so the top isn't cut */
+  .avatar {
+    object-fit: cover;           /* keep the nice fill */
+    object-position: 50% 25%;    /* was center; show a bit more forehead */
+    margin-top: 6px;             /* tiny breathing room inside the card */
+  }
+
+  /* 2) If the card clips the avatar's shadow at the top on some devices */
+  .about-card.card.glass {
+    padding-top: 20px;           /* small extra padding on phones only */
+    overflow: visible;           /* ensure no visual clipping */
+  }
+}
 
   .hero-grid > *, .expertise-aside > * { min-width: 0 !important; }
 }
