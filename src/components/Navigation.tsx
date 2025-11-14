@@ -35,10 +35,9 @@ export default function Navigation() {
   };
 
   return (
-    <AppBar position="fixed"  sx={{
+    <AppBar position="relative"  sx={{
     backgroundColor: "transparent", // dark header
     color: "#ffffff",
-    paddingBottom : "0.5px",
     boxShadow: "none",
     borderBottom: "1px solid rgba(255,255,255,0.1)"
   }}className={`topbar ${scrolled ? "scrolled" : ""}`}>
