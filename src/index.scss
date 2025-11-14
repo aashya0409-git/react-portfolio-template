@@ -26,7 +26,7 @@ p,span,li,small{color:var(--text); opacity:.95}
 .section-title{font-size:2.4rem; letter-spacing:.2px; margin:0 0 .75rem}
 
 /* FIX: use 100vw, not 120vw, to prevent overflow */
-.container-full{width:min(2000px,90vw); margin:0 auto; padding:0 12px;}
+.container-full{width:min(2100px,90vw); margin:0 auto; padding:0 12px;}
 .row-2{padding:40px 0 6px;}
 
 .card{
