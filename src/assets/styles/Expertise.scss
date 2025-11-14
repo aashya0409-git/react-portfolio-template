@@ -1,4 +1,4 @@
-.skills-container.embedded{padding:10px}
+.skills-container.embedded{padding:15px}
 .exp-grid{
   display:grid; gap:28px;
   grid-template-columns: repeat(3, minmax(0,1fr));
@@ -10,6 +10,6 @@
   .exp-card__chips{display:flex; flex-wrap:wrap; gap:8px}
   .chip{font-size:0.25rem}
 }
-@media(max-width:1300px){
+@media(max-width:1800px){
   .exp-grid{grid-template-columns:1fr}
 }

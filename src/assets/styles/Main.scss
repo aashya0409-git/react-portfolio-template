@@ -7,22 +7,22 @@
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr; /* about | expertise */
+  grid-template-columns: 1fr 1.45fr; /* about | expertise */
   gap: clamp(18px, 2.5vw, 28px);
   align-items: start;
 }
 
 /* Card */
 .card.glass {
-  background: rgba(10, 14, 20, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-  border-radius: 14px;
-  padding: clamp(18px, 3vw, 22px);
+  border-radius: 18px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: radial-gradient(1200px 700px at 50% -20%, rgba(255,255,255,0.06), rgba(255,255,255,0.02)) , rgba(10, 14, 25, .45);
+  box-shadow: 0 6px 26px rgba(0,0,0,0.35);
 }
 
-/* Avatar block */
-.avatar-wrap {
+/* About header */
+.about-card .avatar-wrap{
   display: flex;
   justify-content: flex-start;
   margin-bottom: 10px;
@@ -77,25 +77,17 @@
     font-size: 0.95rem;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.10);
-    color: #e7ecf6;
-    text-decoration: none;
-    transition: background 0.2s ease;
-
-    &:hover { background: rgba(255,255,255,0.12); }
-    &.muted { color: #b8c2d4; }
+    color: #e9eef7;
   }
 }
 
-/* Body */
+/* Bulleted summary */
 .about-body {
-  color: #d7deec;
-
-  p { margin: 0 0 10px; font-size: clamp(1.3rem, 1.2vw, 1.1rem); line-height: 1.6; }
-
+  p { margin: 0 0 10px; color: #e7eaf3; }
   .bullets {
-    margin: 8px 0 0;
+    list-style: disc;
     padding-left: 18px;
-    li { margin: 4px 0; font-size: clamp(1.2rem, 1.2vw, 1.1rem); line-height: 1.6;}
+    li { margin: 4px 0; font-size: clamp(1.1rem, 1.1vw, 1.0rem); line-height: 1.6;}
   }
 }
 
@@ -107,4 +99,111 @@
 /* Responsive */
 @media (max-width: 1124px) {
   .hero-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- tiny safeguard so grid children never cause horizontal scroll ---- */
+.hero-grid > * { min-width: 0; }
+/* =========================
+   MOBILE LAYOUT OVERRIDES
+   (append-only, desktop unchanged)
+   ========================= */
+
+/* prevent grid/flex children from forcing horizontal scroll */
+.hero-grid > *,
+.expertise-aside > *,
+.timeline,
+.card { min-width: 0; }
+
+/* ===== FINAL MOBILE/TABLET OVERRIDES (force-override with !important) ===== */
+
+/* Kill horizontal scroll everywhere */
+html, body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Media that can overflow */
+img, video, canvas, svg {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+/* Phone sizes */
+@media (max-width: 768px) {
+
+  /* Outer gutters so text doesn't hug the edges */
+  .container-full,
+  .hero.container-full {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 24px !important;
+    padding-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Stack the hero (About above Expertise) */
+  .hero-grid {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Make each Expertise card take full width in one column */
+  .expertise-aside {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Prevent any child from forcing overflow */
+  .hero-grid > *, .expertise-aside > *, .card, .timeline {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Slightly tighter inner padding on cards for phones */
+  .card.glass {
+    padding: 18px !important;
+  }
+
+  /* Bullets not hugging the border */
+  .about-body .bullets {
+    padding-left: 18px !important;
+  }
+
+  /* Wrap skill chips nicely */
+  .badges, .chips {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Keep the timeline line and bullets inside viewport */
+  .timeline::before { left: 12px !important; }
+  .timeline-item    { margin-left: 44px !important; }
+  .timeline-bullet  { left: 8px !important; }
+}
+
+/* Small tablets (portrait / narrow landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  /* Give Expertise two columns on small tablets */
+  .expertise-aside {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  /* Guard against wide paddings causing squeeze */
+  .container-full,
+  .hero.container-full {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .hero-grid > *, .expertise-aside > * { min-width: 0 !important; }
 }

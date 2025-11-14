@@ -10,10 +10,13 @@
 }
 
 *{box-sizing:border-box}
-html,body,#root{height:100%}
+html,body,#root{height:100%; width:100%}
 body{
-  margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Segoe UI Emoji";
-  color:var(--text); background: var(--bg) no-repeat center/cover fixed;
+  overflow-x:hidden; /* stop accidental horizontal scroll */
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Segoe UI Emoji";
+  color:var(--text);
+  background: var(--bg) no-repeat center/cover fixed;
   background-image: url("./background-img.jpg");
 }
 
@@ -22,22 +25,55 @@ p,span,li,small{color:var(--text); opacity:.95}
 .muted{color:var(--text-muted)}
 .section-title{font-size:2.4rem; letter-spacing:.2px; margin:0 0 .75rem}
 
-.container-full{width:min(2400px,120vw); margin:0 auto; padding:0 12px;}
+/* FIX: use 100vw, not 120vw, to prevent overflow */
+.container-full{width:min(2000px,90vw); margin:0 auto; padding:0 12px;}
 .row-2{padding:40px 0 6px;}
 
 .card{
-  border-radius:14px; border:1px solid var(--card-border); padding:18px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
 }
+
+/* chips look */
+.chip .MuiChip-root, .chip{
+  background:var(--chip)!important; color:var(--text)!important;
+  border:1px solid rgba(86, 80, 80, 0.12)!important; font-size:1.1rem!important;
+}
+
+a{color:var(--text); text-decoration:none}
+a:hover{opacity:.9}
+
+/* Glass effect shared */
 .glass {
   background: rgba(255, 251, 251, 0.05);
   backdrop-filter: blur(26px);
   border: 1px solid rgba(246, 243, 243, 0.08);
 }
+/* =========================
+   MOBILE + OVERFLOW OVERRIDES
+   (safe, append-only)
+   ========================= */
+:root { --_gutter: 16px; }
 
+/* stop any horizontal scrollbar caused by wide children */
+html, body { max-width: 100%; overflow-x: hidden; }
 
-.chip .MuiChip-root, .chip{
-  background:var(--chip)!important; color:var(--text)!important; border:2px solid rgba(86, 80, 80, 0.12)!important; font-size:1.1rem!important;
+/* media images should never push the layout wider than the screen */
+img, video, canvas, svg { max-width: 100%; height: auto; display: block; }
+
+/* Only adjust the outer wrapper on small screens.
+   We intentionally avoid changing desktop spacing. */
+@media (max-width: 768px) {
+  .container-full {
+    width: 100%;
+    max-width: 100%;
+    padding-left: var(--_gutter);
+    padding-right: var(--_gutter);
+  }
 }
 
-a{color:var(--text); text-decoration:none}
-a:hover{opacity:.9}
+/* On some devices the 100vw vs scrollbar can cause overflow.
+   This keeps things tidy on tablets without touching desktop. */
+@media (max-width: 1024px) {
+  .container-full { width: min(2400px, 100vw); }
+}
