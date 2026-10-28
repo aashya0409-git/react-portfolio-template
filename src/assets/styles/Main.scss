@@ -1,224 +1,66 @@
-/* Container & grid */
-.hero.container-full {
-  max-width: 2400px;
-  margin: 0 auto;
-  padding: 120px;
+.hero { padding-top: clamp(120px, 14vw, 170px); padding-bottom: 0; overflow: hidden;
+  &__grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  &__copy { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+  &__title { font-size: clamp(2.5rem, 6.4vw, 4.9rem); margin: 1.4rem 0 1.4rem; font-weight: 700; }
+  &__role { display: flex; align-items: center; gap: 14px; font-size: clamp(1.05rem, 2vw, 1.35rem); margin-bottom: 1.1rem; color: #e4e8f6;
+    strong { color: #fff; } }
+  &__avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid transparent;
+    background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--grad) border-box; flex: none; }
+  &__intro { max-width: 58ch; font-size: 1.05rem; color: var(--muted); }
+  &__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 1.8rem; }
+  &__social { display: flex; gap: 8px; margin-left: 6px;
+    a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); color: #d6dbee; transition: .2s;
+      &:hover { color: #fff; border-color: var(--cyan); transform: translateY(-2px); } } }
+  &__visual { position: relative; animation: rise 1s .15s cubic-bezier(.2,.7,.2,1) both; }
 }
+@keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.45fr; /* about | expertise */
-  gap: clamp(18px, 2.5vw, 28px);
-  align-items: start;
+.rotator { position: relative; display: inline-block; vertical-align: bottom; font-weight: 600;
+  &__item { position: absolute; left: 0; top: 0; white-space: nowrap; opacity: 0; transform: translateY(60%); transition: all .55s cubic-bezier(.2,.7,.2,1);
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    &.is-on { opacity: 1; transform: none; } }
+  &__sizer { visibility: hidden; white-space: nowrap; } }
+
+.pipe { padding: 0 0 20px; position: relative; z-index: 1; overflow: hidden;
+  &__bar { display: flex; align-items: center; gap: 7px; padding: 14px 18px; border-bottom: 1px solid var(--border);
+    span { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; &:nth-child(2) { background: #febc2e; } &:nth-child(3) { background: #28c840; } }
+    em { margin-left: 10px; font: normal .78rem var(--mono); color: var(--muted); } }
+  &__list { padding: 22px 26px 6px; position: relative;
+    &::before { content: ""; position: absolute; left: 33px; top: 34px; bottom: 22px; width: 2px;
+      background: repeating-linear-gradient(to bottom, rgba(34,211,238,.55) 0 6px, transparent 6px 12px); } }
+  &__node { display: flex; gap: 18px; align-items: flex-start; padding: 10px 0; opacity: 0; animation: rise .7s both;
+    strong { display: block; font-family: var(--display); font-size: 1.05rem; }
+    small { color: var(--muted); font: .78rem var(--mono); } }
+  &__dot { width: 16px; height: 16px; border-radius: 50%; margin-top: 4px; flex: none; position: relative; z-index: 1;
+    background: var(--bg); border: 2px solid var(--cyan); box-shadow: 0 0 0 4px rgba(34,211,238,.12); }
+  &__foot { margin: 8px 26px 0; padding-top: 14px; border-top: 1px solid var(--border); font: .78rem var(--mono); color: var(--muted); display: flex; align-items: center; gap: 10px; } }
+
+.orb { position: absolute; border-radius: 50%; filter: blur(50px); z-index: 0;
+  &--a { width: 180px; height: 180px; background: rgba(139,92,246,.5); top: -40px; right: -30px; }
+  &--b { width: 160px; height: 160px; background: rgba(34,211,238,.35); bottom: -30px; left: -30px; } }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: clamp(32px, 4vw, 56px);
+  .stat { padding: 22px 24px; transition: transform .3s; &:hover { transform: translateY(-4px); } }
+  .stat__num { font: 700 clamp(1.8rem, 3.6vw, 2.6rem)/1 var(--display); background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    small { font: 500 .8rem var(--mono); -webkit-text-fill-color: var(--muted); margin-right: 6px; } }
+  .stat__label { color: var(--muted); font-size: .88rem; margin-top: .5rem; } }
+
+.marquee { margin-top: clamp(28px, 4vw, 48px); overflow: hidden; border-block: 1px solid var(--border); padding: 18px 0;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  &__track { display: flex; gap: 48px; width: max-content; animation: scroll 38s linear infinite;
+    span { font: 500 .95rem var(--mono); color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: 48px;
+      &::after { content: "◆"; font-size: .55rem; color: var(--violet); } } } }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+.about { &__cols { display: grid; grid-template-columns: 1.3fr .8fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  &__text p { font-size: 1.08rem; color: #c3c9de; }
+  &__now { padding: 28px; h3 { font-size: 1.3rem; margin-bottom: .3rem; } p:last-child { margin: 0; font-size: .95rem; } } }
+
+@media (max-width: 960px) {
+  .hero__grid, .about__cols { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
 }
-
-/* Card */
-.card.glass {
-  border-radius: 18px;
-  padding: 28px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: radial-gradient(1200px 700px at 50% -20%, rgba(255,255,255,0.06), rgba(255,255,255,0.02)) , rgba(10, 14, 25, .45);
-  box-shadow: 0 6px 26px rgba(0,0,0,0.35);
-}
-
-/* About header */
-.about-card .avatar-wrap{
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-}
-
-.avatar {
-  width: clamp(72px, 9vw, 112px);
-  height: clamp(82px, 10vw, 118px);
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255,255,255,0.15);
-  box-shadow: 0 6px 26px rgba(0,0,0,0.35);
-}
-
-.avatar--fallback {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #253047, #111827);
-  color: #e8eefb;
-  font-weight: 700;
-  font-size: clamp(20px, 3vw, 32px);
-}
-
-/* Text */
-.about-title {
-  font-size: clamp(28px, 3.4vw, 40px);
-  line-height: 1.15;
-  margin: 6px 0 2px;
-  color: #f2f6ff;
-}
-
-.tagline {
-  color: #dce1e9;
-  margin-bottom: 12px;
-  font-size: clamp(1.4rem, 1.2vw, 1.3rem);
-}
-
-/* Links row */
-.about-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 10px;
-  margin-bottom: 26px;
-
-  .icon-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.10);
-    color: #e9eef7;
-  }
-}
-
-/* Bulleted summary */
-.about-body {
-  p { margin: 0 0 10px; color: #e7eaf3; }
-  .bullets {
-    list-style: disc;
-    padding-left: 18px;
-    li { margin: 4px 0; font-size: clamp(1.1rem, 1.1vw, 1.0rem); line-height: 1.6;}
-  }
-}
-
-/* Expertise area when embedded */
-.expertise-aside {
-  min-width: 0; /* prevent overflow */
-}
-
-/* Responsive */
-@media (max-width: 1124px) {
-  .hero-grid { grid-template-columns: 1fr; }
-}
-
-/* ---- tiny safeguard so grid children never cause horizontal scroll ---- */
-.hero-grid > * { min-width: 0; }
-/* =========================
-   MOBILE LAYOUT OVERRIDES
-   (append-only, desktop unchanged)
-   ========================= */
-
-/* prevent grid/flex children from forcing horizontal scroll */
-.hero-grid > *,
-.expertise-aside > *,
-.timeline,
-.card { min-width: 0; }
-
-/* ===== FINAL MOBILE/TABLET OVERRIDES (force-override with !important) ===== */
-
-/* Kill horizontal scroll everywhere */
-html, body {
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-}
-
-/* Media that can overflow */
-img, video, canvas, svg {
-  max-width: 100% !important;
-  height: auto !important;
-  display: block !important;
-}
-
-/* Phone sizes */
-@media (max-width: 768px) {
-
-  /* Outer gutters so text doesn't hug the edges */
-  .container-full,
-  .hero.container-full {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    padding-top: 24px !important;
-    padding-bottom: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Stack the hero (About above Expertise) */
-  .hero-grid {
-    display: block !important;
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-  }
-
-  /* Make each Expertise card take full width in one column */
-  .expertise-aside {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    width: 100% !important;
-  }
-
-  /* Prevent any child from forcing overflow */
-  .hero-grid > *, .expertise-aside > *, .card, .timeline {
-    min-width: 0 !important;
-    max-width: 100% !important;
-  }
-
-  /* Slightly tighter inner padding on cards for phones */
-  .card.glass {
-    padding: 18px !important;
-  }
-
-  /* Bullets not hugging the border */
-  .about-body .bullets {
-    padding-left: 18px !important;
-  }
-
-  /* Wrap skill chips nicely */
-  .badges, .chips {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-
-  /* Keep the timeline line and bullets inside viewport */
-  .timeline::before { left: 12px !important; }
-  .timeline-item    { margin-left: 44px !important; }
-  .timeline-bullet  { left: 8px !important; }
-}
-
-/* Small tablets (portrait / narrow landscape) */
-@media (min-width: 769px) and (max-width: 1024px) {
-
-  /* Give Expertise two columns on small tablets */
-  .expertise-aside {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
-    gap: 16px !important;
-  }
-
-  /* Guard against wide paddings causing squeeze */
-  .container-full,
-  .hero.container-full {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-  /* --- MOBILE AVATAR FIX --- */
-@media (max-width: 768px) {
-  /* 1) Nudge the image down so the top isn't cut */
-  .avatar {
-    object-fit: cover;           /* keep the nice fill */
-    object-position: 50% 20%;    /* was center; show a bit more forehead */
-    margin-top: 6px;             /* tiny breathing room inside the card */
-  }
-
-  /* 2) If the card clips the avatar's shadow at the top on some devices */
-  .about-card.card.glass {
-    padding-top: 20px;           /* small extra padding on phones only */
-    overflow: visible;           /* ensure no visual clipping */
-  }
-}
-
-  .hero-grid > *, .expertise-aside > * { min-width: 0 !important; }
+@media (max-width: 520px) {
+  .hero__social { margin-left: 0; }
+  .hero__role { align-items: flex-start; }
 }

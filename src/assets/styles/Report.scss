@@ -1,0 +1,134 @@
+/* ==========================================================
+   "Report" theme: looks like a BI report, not a SaaS landing page.
+   Active when <html data-theme="report"> (default). Toggle in nav.
+   ========================================================== */
+:root[data-theme="report"] {
+  --bg: #f5f2ea;
+  --surface: #ffffff;
+  --surface-2: #faf8f3;
+  --border: rgba(20, 23, 31, 0.14);
+  --text: #14171f;
+  --muted: #5d6272;
+  --violet: #b45309;      /* amber ink */
+  --cyan: #0f766e;        /* teal: primary accent */
+  --green: #15803d;
+  --grad: linear-gradient(90deg, #0f766e, #0f766e);
+  --radius: 10px;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: light;
+
+  body { background: var(--bg); color: var(--text); }
+  h1, h2, h3, h4 { color: var(--text); font-weight: 600; letter-spacing: -0.015em; }
+  p { color: #3a3f4d; }
+  ::selection { background: rgba(15, 118, 110, .22); }
+
+  /* Background: graph paper instead of aurora */
+  .bg { background: var(--bg); }
+  .bg__blob { display: none; }
+  .bg__grid {
+    background-image:
+      linear-gradient(rgba(20,23,31,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,23,31,.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(#000 0%, #000 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(#000 0%, #000 55%, transparent 100%);
+  }
+
+  /* Type */
+  .eyebrow { color: var(--cyan); font-family: var(--mono); &::before { background: var(--cyan); } }
+  .h2 { font-weight: 600; }
+  .grad {
+    background: linear-gradient(transparent 62%, rgba(217, 119, 6, .30) 62%, rgba(217, 119, 6, .30) 92%, transparent 92%);
+    -webkit-background-clip: border-box; background-clip: border-box;
+    -webkit-text-fill-color: currentColor; color: var(--text); padding: 0 .08em;
+  }
+  .muted { color: var(--muted) !important; }
+
+  /* Tiles */
+  .glass {
+    background: var(--surface); border: 1px solid var(--border); backdrop-filter: none; -webkit-backdrop-filter: none;
+    box-shadow: 0 1px 0 rgba(20,23,31,.04), 0 10px 30px -18px rgba(20,23,31,.28);
+  }
+
+  /* Buttons / chips / pills */
+  .btn--glow { background: var(--text); color: #fff; box-shadow: 0 8px 22px -10px rgba(20,23,31,.55);
+    &:hover { background: #0f766e; box-shadow: 0 12px 26px -10px rgba(15,118,110,.6); } }
+  .btn--ghost { background: transparent; color: var(--text); border-color: rgba(20,23,31,.28); &:hover { background: var(--surface); border-color: var(--text); } }
+  .chip { background: var(--surface-2); color: #2a2f3c; border-color: var(--border); font-family: var(--mono); font-size: .74rem;
+    &:hover { background: rgba(15,118,110,.08); border-color: rgba(15,118,110,.55); } }
+  .pill { background: var(--surface); color: #2a2f3c; }
+  .pulse { background: var(--green); &::after { border-color: var(--green); } }
+
+  /* Nav */
+  .nav--scrolled { background: rgba(245,242,234,.86); }
+  .nav__logo { background: var(--text); color: #fff; border-radius: 8px; font-family: var(--mono); }
+  .nav__name { color: var(--text); }
+  .nav__link { color: var(--muted); &:hover { color: var(--text); } &.is-active { color: var(--text); background: rgba(20,23,31,.07); } }
+  .nav__burger { background: var(--surface); span { background: var(--text); } }
+  .nav__sheet { background: rgba(245,242,234,.98); }
+  .nav__sheetlink { color: var(--text); }
+
+  /* Hero */
+  .hero__title { font-weight: 600; letter-spacing: -0.025em; }
+  .hero__role, .hero__role strong { color: var(--text); }
+  .hero__avatar { background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(135deg, #0f766e, #d97706) border-box; }
+  .hero__intro { color: var(--muted); }
+  .hero__social a { background: var(--surface); color: var(--text); &:hover { color: var(--cyan); border-color: var(--cyan); } }
+  .rotator__item { background: none; -webkit-text-fill-color: var(--cyan); color: var(--cyan); }
+
+  /* Pipeline card stays dark: a "query window" on a paper page */
+  .pipe { background: #14171f; border-color: #14171f; box-shadow: 0 24px 50px -24px rgba(20,23,31,.65);
+    .pipe__bar { border-color: rgba(255,255,255,.1); em { color: #8d95ad; } }
+    strong { color: #fff; } small { color: #9aa3bd; }
+    .pipe__dot { background: #14171f; border-color: #2dd4bf; box-shadow: 0 0 0 4px rgba(45,212,191,.14); }
+    .pipe__foot { color: #9aa3bd; border-color: rgba(255,255,255,.1); }
+    .pipe__list::before { background: repeating-linear-gradient(to bottom, rgba(45,212,191,.6) 0 6px, transparent 6px 12px); } }
+  .orb { display: none; }
+
+  /* KPI tiles */
+  .stat { border-top: 3px solid var(--cyan);
+    &:nth-child(even) { border-top-color: #d97706; }
+    .stat__num { font-family: var(--mono); font-weight: 500; letter-spacing: -.03em; background: none; -webkit-text-fill-color: var(--text); color: var(--text);
+      small { -webkit-text-fill-color: var(--muted); } }
+    .stat__label { font-family: var(--mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; } }
+
+  .marquee { border-color: var(--border); &__track span { color: var(--muted); &::after { color: #d97706; } } }
+
+  .about__text p { color: #3a3f4d; }
+
+  /* Skills */
+  .bento__cell::after { background: radial-gradient(circle, rgba(15,118,110,.14), transparent 70%); }
+  .bento__cell:hover { border-color: rgba(15,118,110,.5); }
+  .bento__icon { background: rgba(15,118,110,.08); border-color: rgba(15,118,110,.3); }
+
+  /* Experience */
+  .tl::before { background: linear-gradient(to bottom, var(--cyan), #d97706 70%, transparent); opacity: .5; }
+  .tl__dot { border-color: #d97706; box-shadow: 0 0 0 5px rgba(217,119,6,.14); &.is-now { border-color: var(--green); box-shadow: 0 0 0 5px rgba(21,128,61,.16); } }
+  .tl__co { color: var(--text); }
+  .tl__date { color: var(--muted); font-family: var(--mono); &--now { color: var(--green); border-color: rgba(21,128,61,.45); background: rgba(21,128,61,.07); } }
+  .tl__list li { color: #3a3f4d; &::before { background: var(--cyan); } }
+  .tl__card:hover { border-color: rgba(20,23,31,.3); }
+
+  /* Projects */
+  .pcard:hover { border-color: rgba(15,118,110,.55); }
+  .pcard__art { background: #0b0d18; }
+  .pcard__kicker { color: var(--cyan) !important; }
+  .pcard__list li { color: #3a3f4d; &::before { color: var(--cyan); } }
+  .pcard__link { color: var(--text); background: var(--surface-2); &:hover { border-color: var(--cyan); color: var(--cyan); } }
+
+  /* Credentials */
+  .cert svg { color: var(--cyan); }
+  .cert--edu { background: linear-gradient(160deg, rgba(15,118,110,.10), rgba(217,119,6,.08)), var(--surface); }
+  .cert--yellow svg { color: #b45309; } .cert--orange svg { color: #c2410c; } .cert--blue svg { color: #1d4ed8; } .cert--violet svg { color: #6d28d9; }
+
+  /* Contact */
+  .contact__links { a, span { color: var(--text); background: var(--surface-2); } a:hover { border-color: var(--cyan); } svg { color: var(--cyan); } }
+  .form {
+    input, textarea { color: var(--text); background: var(--surface-2); &::placeholder { color: #9a9fae; }
+      &:focus { background: #fff; border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(15,118,110,.14); } }
+    &__status--error { color: #be123c; } &__status--ok { color: var(--green); } }
+
+  /* Footer */
+  .footer__links a:hover { color: var(--cyan); border-color: var(--cyan); }
+}

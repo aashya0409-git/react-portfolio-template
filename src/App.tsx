@@ -1,11 +1,13 @@
 import React from "react";
 import Navigation from "./components/Navigation";
 import Main from "./components/Main";
+import Expertise from "./components/Expertise";
 import Timeline from "./components/Timeline";
 import Project from "./components/Project";
+import Credentials from "./components/Credentials";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
-// Global styles (load once here)
 import "./index.scss";
 import "./assets/styles/Navigation.scss";
 import "./assets/styles/Main.scss";
@@ -13,32 +15,28 @@ import "./assets/styles/Expertise.scss";
 import "./assets/styles/Timeline.scss";
 import "./assets/styles/Project.scss";
 import "./assets/styles/Contact.scss";
+import "./assets/styles/Footer.scss";
+import "./assets/styles/Report.scss";
 
 function App() {
   return (
     <>
+      <div className="bg" aria-hidden="true">
+        <div className="bg__blob bg__blob--1" />
+        <div className="bg__blob bg__blob--2" />
+        <div className="bg__blob bg__blob--3" />
+        <div className="bg__grid" />
+      </div>
       <Navigation />
-      {/* Row 1: About + Expertise (rendered inside Main) */}
-      <Main />
-
-      {/* Row 2: Career History + Projects */}
-      <section id="history-projects" className="container-full row-2">
-       
-          <div className="col">
-            <h2 className="section-title">Career History</h2>
-            <Timeline />
-          </div>
-           </section>
-           <section id="projects" className="container-full row-2">
-          <div className="col">
-            <h2 className="section-title">Personal Projects</h2>
-            <Project />
-          </div>
-          / </section>
-     
-
-      {/* Contact */}
-      <Contact />
+      <main>
+        <Main />
+        <Expertise />
+        <Timeline />
+        <Project />
+        <Credentials />
+        <Contact />
+      </main>
+      <Footer />
     </>
   );
 }

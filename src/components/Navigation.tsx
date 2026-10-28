@@ -1,79 +1,94 @@
-import React, { useState, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import Box from "@mui/material/Box";
-import { green } from "@mui/material/colors";
-
-const navItems: [string, string][] = [
-  ["Expertise", "about"],           // scrolls to top section
-  ["Career History", "history-projects"],
-  ["Projects", "projects"], // same row, right column
-  ["Contact", "contact"],
-];
+import React, { useEffect, useMemo, useState } from "react";
+import { navItems, profile } from "../data/portfolio";
+import { useScrollSpy } from "../hooks/useReveal";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<string>(() => document.documentElement.dataset.theme || "report");
+  const toggleTheme = () => {
+    const next = theme === "report" ? "dark" : "report";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
+    setTheme(next);
+  };
+  const ids = useMemo(() => navItems.map(([, id]) => id), []);
+  const active = useScrollSpy(ids);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const go = (id: string) => {
+    setOpen(false);
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <AppBar position="relative"  sx={{
-    backgroundColor: "#4f6b68ff", // dark header
-    color: "#ffffff",
-    boxShadow: "none",
-    borderBottom: "1px solid rgba(255,255,255,0.1)"
-  }}className={`topbar ${scrolled ? "scrolled" : ""}`}>
-      <Toolbar className="topbar__inner">
-        <IconButton
-          edge="start"
-          className="topbar__menu"
-          color="inherit"
-          aria-label="menu"
-          onClick={() => setOpen(true)}
+    <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
+      <div className="nav__inner">
+        <a
+          href="#top"
+          className="nav__brand"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          aria-label={`${profile.name} — back to top`}
         >
-          <MenuIcon />
-        </IconButton>
+          <span className="nav__logo">AM</span>
+          <span className="nav__name">Aashya M</span>
+        </a>
 
-        <div className="topbar__links">
+        <nav className="nav__links" aria-label="Primary">
           {navItems.map(([label, id]) => (
-            <Button key={id} onClick={() => scrollTo(id)}>{label}</Button>
+            <button
+              key={id}
+              className={`nav__link ${active === id ? "is-active" : ""}`}
+              onClick={() => go(id)}
+            >
+              {label}
+            </button>
           ))}
-        </div>
-      </Toolbar>
+        </nav>
 
-      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 260 }} role="presentation" onClick={() => setOpen(false)}>
-          <List>
-            {navItems.map(([label, id]) => (
-              <ListItem key={id} disablePadding>
-                <ListItemButton onClick={() => scrollTo(id)}>
-                  <ListItemText primary={label} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-        </Box>
-      </Drawer>
-    </AppBar>
+        <button className="nav__theme" onClick={toggleTheme} aria-label="Switch design">
+          {theme === "report" ? "◐ Dark" : "◑ Report"}
+        </button>
+
+        <button className="btn btn--sm btn--glow nav__cta" onClick={() => go("contact")}>
+          Let’s talk
+        </button>
+
+        <button
+          className={`nav__burger ${open ? "is-open" : ""}`}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <span />
+          <span />
+        </button>
+      </div>
+
+      <div className={`nav__sheet ${open ? "is-open" : ""}`}>
+        {navItems.map(([label, id]) => (
+          <button key={id} className="nav__sheetlink" onClick={() => go(id)}>
+            {label}
+          </button>
+        ))}
+      </div>
+    </header>
   );
 }

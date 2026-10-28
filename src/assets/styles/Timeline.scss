@@ -1,5 +1,15 @@
-.timeline-wrap{padding-top:.25rem}
-.vt-card .card{margin:0}
-.vertical-timeline-element-content{padding:0!important; background:transparent!important; box-shadow:none!important}
-.vertical-timeline-element-content .card{padding:26px;font-size:2rem; background:var(--card-bg); border:2px solid rgba(255,255,255,0.15); box-shadow:0 6px 26px rgba(0,0,0,0.35)}
-.vertical-timeline-element-date{color:rgb(252, 255, 255)!important;font-size:1.2rem!important; font-weight:600!important; margin-bottom:8px!important}
+.tl { position: relative; padding-left: 38px;
+  &::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--cyan), var(--violet) 60%, transparent); opacity: .55; }
+  &__item { position: relative; margin-bottom: 22px; }
+  &__dot { position: absolute; left: -38px; top: 30px; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); border: 2px solid var(--violet); box-shadow: 0 0 0 5px rgba(139,92,246,.14);
+    &.is-now { border-color: var(--green); box-shadow: 0 0 0 5px rgba(52,211,153,.16); } }
+  &__card { padding: 28px; transition: transform .3s, border-color .3s; &:hover { transform: translateX(4px); border-color: rgba(255,255,255,.18); } }
+  &__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; margin-bottom: 1.1rem;
+    h3 { font-size: 1.35rem; } }
+  &__co { margin: .25rem 0 0; font-weight: 600; color: #e6e9f6; }
+  &__date { font: .78rem var(--mono); color: var(--muted); border: 1px solid var(--border); padding: .35rem .8rem; border-radius: 999px; align-self: flex-start; display: inline-flex; align-items: center; gap: .55rem; white-space: nowrap;
+    &--now { color: var(--green); border-color: rgba(52,211,153,.4); background: rgba(52,211,153,.07); } }
+  &__list { margin-bottom: 1.2rem;
+    li { position: relative; padding-left: 20px; margin-bottom: .6rem; color: #c3c9de; font-size: .96rem;
+      &::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; border-radius: 2px; background: var(--grad); transform: rotate(45deg); } } } }
+@media (max-width: 600px) { .tl { padding-left: 28px; } .tl__dot { left: -28px; } .tl__card { padding: 22px; } }

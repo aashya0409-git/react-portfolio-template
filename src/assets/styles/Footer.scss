@@ -1,7 +1,4 @@
-.footer {
-  padding: 36px 0 70px; text-align: center;
-  border-top: 1px solid var(--border); margin-top: 24px;
-}
-.footer__links { display: flex; gap: 10px; justify-content: center; margin-bottom: 8px; }
-.footer__links a { padding: 8px; border: 1px solid var(--border); border-radius: 10px; }
-.footer__links a:hover { color: var(--accent); border-color: rgba(91,124,255,.45); }
+.footer { border-top: 1px solid var(--border); padding: 28px 0;
+  &__inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; p { margin: 0; font-size: .88rem; } }
+  &__links { display: flex; gap: 8px; a { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--border); color: var(--muted); transition: .2s;
+    &:hover { color: #fff; border-color: var(--cyan); } } } }

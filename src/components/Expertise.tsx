@@ -1,64 +1,56 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartLine, faDatabase, faCloud } from "@fortawesome/free-solid-svg-icons";
-import Chip from "@mui/material/Chip";
+import { skillGroups } from "../data/portfolio";
+import { Reveal } from "../hooks/useReveal";
 
-const labelsAnalyst = [
-  "Power BI Desktop/Service","DAX (KPIs, Measures)","Power Query (M)","Excel Pivot & PowerPivot",
-  "Data storytelling","Trend & variance analysis","KPI Dashboards","Drill-through reports",
-  "Paginated Reports","RLS / OLS Security","Tableau (Visual Analytics)"
-];
+const icons: Record<string, JSX.Element> = {
+  pipeline: (
+    <svg viewBox="0 0 24 24"><path d="M4 6h5v4H4zM15 14h5v4h-5zM9 8h3a3 3 0 0 1 3 3v3" /></svg>
+  ),
+  chart: (
+    <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2" /></svg>
+  ),
+  db: (
+    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3" /><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" /></svg>
+  ),
+  code: (
+    <svg viewBox="0 0 24 24"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14" /></svg>
+  ),
+  shield: (
+    <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6z" /><path d="m9 12 2 2 4-4" /></svg>
+  ),
+  team: (
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2.5" /><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5.5" /></svg>
+  ),
+};
 
-const labelsBIDev = [
-  "MS SQL Server 2016–2019","T-SQL (SPs, Views, CTEs)","SSIS (ETL, SCD Type 2)",
-  "SSAS Tabular Modeling","SSAS Multidimensional Cubes","Data Modeling (Star/Snowflake)",
-  "Query Optimization","Database Indexing & Performance Tuning","SQL Profiler / Plan Explorer",
-  "Version Control (Git / Azure DevOps)"
-];
-
-const labelsDataEng = [
-  "Azure Data Factory (ADF)","Microsoft Fabric (Pipelines, Lakehouse, OneLake)","Azure Synapse Analytics",
-  "Azure Data Lake","Databricks (PySpark / Spark SQL)","Snowflake",
-  "Python (Pandas, Validation, Automation)","dbt (Exploring)","CI/CD Pipelines (Azure DevOps)","Metadata-driven ETL Frameworks"
-];
-
-export default function Expertise({ embedded }: { embedded?: boolean }) {
-  const Block = ({
-    icon, title, desc, chips,
-  }: { icon: any; title: string; desc: string; chips: string[] }) => (
-    <div className="exp-card card glass">
-      <div className="exp-card__icon"><FontAwesomeIcon icon={icon} /></div>
-      <h3>{title}</h3>
-      <p className="muted">{desc}</p>
-      <div className="exp-card__chips">
-        {chips.map((c, i) => <Chip key={i} label={c} className="chip" />)}
-      </div>
-    </div>
-  );
-
+export default function Expertise() {
   return (
-    <div className={`skills-container ${embedded ? "embedded" : ""}`}>
-      <h2 className="section-title">{embedded ? "Expertise" : "Expertise"}</h2>
-      <div className="exp-grid">
-        <Block
-          icon={faChartLine}
-          title="Data Analyst"
-          desc="KPI dashboards, variance analysis, ad-hoc insights in Power BI; DAX models, drill-through, RLS/OLS; polished visual storytelling."
-          chips={labelsAnalyst}
-        />
-        <Block
-          icon={faDatabase}
-          title="Power BI / BI / SQL Developer"
-          desc="Enterprise BI: T-SQL, SSIS ETL, SSAS Tabular & Multidimensional; semantic modeling, performance tuning, and CI/CD deployments."
-          chips={labelsBIDev}
-        />
-        <Block
-          icon={faCloud}
-          title="Data Engineer"
-          desc="Azure data workflows with ADF, Synapse, Fabric; Databricks (PySpark) for scalable transforms; governance & monitoring."
-          chips={labelsDataEng}
-        />
+    <section className="section" id="skills">
+      <div className="wrap">
+        <Reveal>
+          <p className="eyebrow">Skills</p>
+          <h2 className="h2">The toolkit behind <span className="grad">reliable analytics</span>.</h2>
+        </Reveal>
+
+        <div className="bento">
+          {skillGroups.map((g, i) => (
+            <Reveal
+              key={g.title}
+              delay={i * 70}
+              className={`bento__cell glass ${g.featured ? "bento__cell--wide" : ""}`}
+            >
+              <div className="bento__icon">{icons[g.icon]}</div>
+              <h3>{g.title}</h3>
+              <p className="muted">{g.blurb}</p>
+              <ul className="chips">
+                {g.items.map((it) => (
+                  <li key={it} className="chip">{it}</li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
